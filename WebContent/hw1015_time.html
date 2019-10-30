@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>초를 시간으로 환산하기</title>
+
+<style type="text/css">
+	input { text-align: right }
+</style>
+
+<script type="text/javascript">
+	function division() {
+		
+		//var inputSectag = document.getElementById("inputSec");
+		//var inputSec = parseInt(inputSectag.value);
+		
+		var input = parseInt(inputSec.value);
+		//document.write(input);
+		
+		document.f.hour.value = Math.floor(input/3600);
+		input = input%3600;
+		document.f.minute.value = parseInt(input/60);
+		document.f.second.value = input%60;
+	}
+</script>
+
+</head>
+<body>
+
+초 : <input type="text" id="inputSec">
+<input type="button" value="시분초로 환산" onclick="division()"><br>
+
+<form name ="f">
+	<input type="text" name="hour" size="5px">시간
+	<input type="text" name="minute" size="5px">분
+	<input type="text" name="second" size="5px">초
+</form>
+
+</body>
+</html>

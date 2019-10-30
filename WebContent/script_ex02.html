@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>TAG의 값을 다른 태그로 복사하기</title>
+
+<script type="text/javascript">
+	function copyvalue() {
+		//		 f=form 이름
+		document.f.num2.value = document.f.num1.value;
+	}
+	function numsum() {
+		var sum =0;
+		var evensum =0;
+		var oddsum =0;
+		var num = document.f2.num.value;
+		// document.f2.num.value은 문자열인데, 자동으로 num을 숫자화 해줌
+		// 숫자가 아닌 다른 문자를 입력하면 0을 내보냄
+		for(var i=0; i<=num; i++) {
+			sum +=i;
+			if(i %2 ==0) {
+				evensum +=i;
+			} else oddsum +=i;
+		}
+		document.f2.sum.value = sum;
+		document.f2.evensum.value = evensum;
+		document.f2.oddsum.value = oddsum;
+	}
+</script>
+
+</head>
+<body>
+
+<!-- form 객체는 document 하위 객체
+	 form 객체의 이름 : f1
+	 f1의 속성 : text 2개 button 1개
+-->
+<form name="f">
+	<input type="text" name="num1"><br>
+	<input type="text" name="num2">
+	<input type="button" value="복사" onclick="copyvalue()">
+</form>
+<br>
+<h2>입력된 숫자까지의 합계를 구해줘 ㅠㅠ</h2>
+<form name="f2">
+	<input type="text" name="num">
+	<input type="button" value="합계" onclick="numsum()"><br>
+	전체 합계 : <input type="text" name="sum"><br>
+	짝수 합계 : <input type="text" name="evensum"><br>
+	홀수 합계 : <input type="text" name="oddsum">
+</form>
+
+</body>
+</html>

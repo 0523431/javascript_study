@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Calendar</title>
+
+<style type="text/css">
+	table {
+		width : 100%;
+		border-collapse: collapse;
+	}
+	th,td {
+		border : 3px solid #ffffff;
+		text-align : center;
+		padding : 16px;
+	}
+	th { /* 요일 표시부분 */
+		background-color : #E57011; color : white;
+	}
+	td { /* 내용 부분 */
+		background-color : #F2E57E;
+		text-align : center;
+	}
+	caption {
+		color : #111111;
+		font-size : 30px;
+		background-color : #ffffff;
+	}
+</style>
+
+<script type="text/javascript">
+	function show_cal() {
+		
+		var yeartag = document.getElementById("y");
+		var year = parseInt(yeartag.value);
+		// var year = parseInt(y.value);
+		var monthtag = document.getElementById("m");
+		var month = parseInt(monthtag.value);
+		// var month = parseInt(m.value);
+		
+		var day = new Date(year,month-1,1);
+		var lastD = new Date(year,month,0).getDate(); // 마지막 날짜
+		/* 마지막 날짜 구하기 선생님 ver.
+			var lastD = new Date(year,month,1) ==> 선택한 다음월 1일
+			lastD = new Date(cal2.getTime() - (1000*60*60*24)); ==> 하루치 시간을 빼줌
+		*/
+//		document.write(day.getDay());
+		
+		var calen = "<table><caption>"+year+"년 "+(month)+"월</caption>"
+		calen += "<tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>"
+		/* calen += "<tr>"
+		for(i=0; i<7; i++) {
+			calen += "<th>"+getDay()+"</th>"
+		}
+		calen += "</tr>" */
+		
+		var start = day.getDay(); // 선택월 1일의 요일 : 0일 1월 2화 3수 4목
+		var date=1;
+		for(i=0; i<=6; i++) {
+			calen += "<tr>"
+			for(j=0; j<7; j++) {
+				
+				// 이게 적용이 안됨 왜? <td>안쪽에 있어야하는데 나는 그걸 각각 만들어줘서
+				// 나중에 선생님처럼 바깥에 <td>를 넣어서 적용하면 됨
+				if(j==0) calen += "<font color='red'>"
+				if(j==6) calen += "<font color='blue'>"
+				
+				if(i==0) {
+					if(j<start) { // j : 세로요일
+						calen += "<td>&nbsp</td>" // "&nbsp";
+					} else {
+						calen += "<td>"+ date + "</td>";
+						date++;
+					}
+				} else {
+					if(date>lastD) {
+						calen += "<td>&nbsp</td>";
+//						break;
+					} else {
+						calen += "<td>"+ date + "</td>";
+						date++;
+					}
+				}
+			}
+			calen += "</tr>"
+		}
+		
+		calen += "</table>"
+		cal1.innerHTML = calen;
+	}
+</script>
+
+</head>
+<body>
+
+<select id="y">
+	<option>2017</option>
+	<option>2018</option>
+	<option>2019</option>
+	<option>2020</option>
+</select>
+<select id="m">
+	<option value="1">1월</option>		<option value="2">2월</option>
+	<option value="3">3월</option>		<option value="4">4월</option>
+	<option value="5">5월</option>		<option value="6">6월</option>
+	<option value="7">7월</option>		<option value="8">8월</option>
+	<option value="9">9월</option>		<option value="10">10월</option>
+	<option value="11">11월</option>		<option value="12">12월</option>
+</select>
+
+<input type="button" value="달력보기" onclick="show_cal()">
+<br>
+<span id="cal1"></span>
+
+</body>
+</html>

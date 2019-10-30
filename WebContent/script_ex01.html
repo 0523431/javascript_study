@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<!--
+	마우스가 화면에 들어오면 바탕색을 변경하기
+-->
+
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>화면의 바탕색 변경하기</title>
+
+<script type="text/javascript">
+	function func1() {
+		document.bgColor="#C3FA0F";
+		alert("마우스가 영역에 들어올 수 없음")
+	}
+</script>
+
+</head>
+<body>
+
+<a 	href="javascript:alert('마우스클릭금지')"
+	onmouseover="document.bgColor='#40A3EE'"
+	onmouseout="document.bgColor='white'">
+	마우스 커서가 이 곳으로 들어오면 바탕색이 짙은 하늘색 <br>벗어나면 흰색으로 변경됨
+</a>
+<br>
+<br>
+<a 	href="http://www.naver.com"
+	onmouseover="func1()"
+	onmouseout="document.bgColor='white'">
+	마우스 커서가 이곳으로 들어오면 마우스는 금지라는 alert() 메시지를 띄우고<br>
+	바탕색을 형광 연두색으로 변경하기
+</a>
+
+</body>
+</html>

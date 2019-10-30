@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+<style type="text/css">
+	input { color:brown; text-align: right; }
+	#str { text-align: left; }
+	/* 기본이 오른쪽 정렬이기때문에, 왼쪽 정렬인 아이들을 클래스로 묶어서 설정해 주는게 더 나음*/
+	/* input.클래스명 { text-align: left } */
+</style>
+
+</head>
+<body>
+
+<script type="text/javascript">
+	function numadd() {
+		var n1 = document.f.n1.value;
+		var n2 = document.f.n2.value;
+		document.f.result.value = parseFloat(n1) + parseFloat(n2);
+		// parseInt()가 없으면 숫자를 문자로 인식해서 10+20=1020이란 결과가 나옴
+		// 그러나 Int형으로 받아와서 소수점계산이 안됨
+	}
+	
+	function numcalc() {
+		var n1 = document.f2.n1.value;
+		var n2 = document.f2.n2.value;
+		document.f2.result.value = eval(n1 + document.f2.op.value + n2);
+		// eval : 문자열을 수식으로 변환하고 그 결과를 리턴
+	}
+</script>
+
+<form name="f0">
+	이름을 입력하세요 <input id="str" type="text" name="name" size="5"><br><br>
+</form>
+
+<h3>두 수를 입력받아 더하기 한 결과를 결과 입력화면에 출력하기</h3>
+
+<form name="f">
+	<input type="text" name="n1" size="5">+
+	<input type="text" name="n2" size="5">=
+	<input type="text" name="result" size="5">
+	<input type="button" value="결과보기" onclick="numadd()"><br>
+</form>
+<br>
+<h3>두 수를 입력받아 연산의 결과를 결과 입력란에 출력하기</h3>
+<form name="f2">
+	<input type="text" name="n1" size="5">
+	<select name="op">
+		<option>+</option>
+		<option>-</option>
+		<option>*</option>
+		<option>/</option>
+	</select>
+	<input type="text" name="n2" size="5">=
+	<input type="text" name="result" size="5">
+	<input type="button" value="결과보기" onclick="numcalc()"><br>
+</form>
+
+</body>
+</html>

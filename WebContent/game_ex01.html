@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<!--
+	1. 자바스크립트에서 객체 생성하기
+	2. 태그 위치 설정하기
+	3. 마우스 이벤트 처리
+-->
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>글자잡기 게임</title>
+
+<script type="text/javascript">
+	
+	function nextRandomInteger(limit) {
+		return Math.round(Math.random() *limit);
+	}
+	
+	function randomSpeed(maxSpeed) {
+		return Math.random() *maxSpeed - Math.random() *maxSpeed;
+	}
+	
+	var canvasWidth = 700;
+	var canvasHeight = 500;
+	var total = 10;
+	
+	// java로 치면, 클래스
+	// MovingText() 객체의 생성자로 생각 ==> 생성자 정의
+	// MovingText()라는 자료형에는 x,y,vX,vY,body라는 5개의 멤버 변수가 있다고 생각
+	function MovingText() {
+		// nextRandomInteger(limit) 함수
+		this.x = nextRandomInteger(canvasWidth); // 0-700 사이의 임의의 값
+		this.y = nextRandomInteger(canvasHeight); // 0-500 사이의 임의의 값
+		
+		// randomSpeed(maxSpeed) 함수
+		// 위치 변경 값 (속도)
+		this.vX = randomSpeed(2); // -2~2 사이의 임의의 값
+		this.vY = randomSpeed(2);
+		
+		// document : 문서 객체(내장객체)
+		// <h1><h1>
+		// <h1>A<h1>
+		// <h1 style:background-color=white'>A</h1>
+		// 속성의 이름은 style이고 그 배경은 white
+		// absolut : 위치지정
+		this.body = document.createElement("h1");
+		this.body.innerHTML = "A";
+		this.body.setAttribute("style","background-color:white");
+		this.body.style.position = "absolute";
+		
+		// 지역변수 text에 body를 넣고
+		var text = this.body;
+		
+		// 클릭 이벤트 등록
+		this.body.onclick = function() {
+			if(text.innerHTML == 'B') {
+				return;
+			} else {
+				--total;
+				alert("남은 글자수   " + total);
+				// text가 가리키고 있는건 
+				text.innerHTML = "B";
+			}
+		}
+		// document의 body태크에 
+		// <body><h1...>A</h1></body>
+		document.body.appendChild(this.body);
+	}
+	
+	// 멤버메서드 구현
+	// MovingText 객체의 멤버 메서드 정의
+	// MovingText.prototype : move라는 메서드를 정의할거야
+	MovingText.prototype.move = function() {
+		// MovingText의 body와 같은 멤버니까 this를 사용할 수 있음
+		// 'B'는 move메서드가 실행되지 않음 (그러니까 B는 움직이지 않게 됨)
+		if(this.body.innerHTML == 'B') {
+			return;
+		}
+		
+		// 범위를 벗어나지 않게 해줌
+		// 가로를 벗어난다 == 음수 그래서 *-1를 해줘서 양수로 만들어서 다시 끓고와
+		if(this.y < 0 || this.y > canvasWidth) {
+			this.vX *= -1;
+		}
+		if(this.y < 0 || this.y > canvasHeight) {
+			this.vY *= -1;
+		}
+		
+		this.x += this.vX;
+		this.y += this.vY;
+		// h1태그의 A글자가 움직이게 됨
+		this.body.style.left = this.x + "px";
+		this.body.style.top = this.y + "px";
+	}
+	
+	// 윈도우가 로드되면 실행되는 함수
+	window.onload = function() {
+		// [] : 자바스크립트의 배열 표시
+		// push : 배열에 내용을 넣어라
+		var movingTexts = [];
+		
+		// 10개의 A가 body에 추가됨
+		for(var i=0; i<10; i++) {
+			movingTexts.push(new MovingText()); // new MovingText() 객체생성
+		}
+		
+		var game = setInterval(function() {
+			// 개선된 for구문
+			// i에는 인덱스 값이 들어감
+			for(var i in movingTexts) {
+				if(total < 4) {
+					alert("게임 종료")
+					clearInterval(game);
+					return;
+				}
+				// setInterval : 1000/60에 한번씩, A의 글자 위치자 변경됨
+				movingTexts[i].move();
+			}
+		}, 1000/60);
+		
+	}
+	
+</script>
+
+</head>
+<body>
+
+
+
+</body>
+</html>

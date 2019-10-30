@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>select 박스에서 선택된 항목을 prompt 창에 띄우기</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	// 과일 선택하면, 입력받을 수 있는 prompt창이 생성됨
+	function nameprint(a) { // a는 this를 의미하지 그리고 그건 document.f.s;를 
+		
+		var data = prompt(a.value); // data : prompt 메세지창에서 입력받은 내용 저장
+									// a.value : select에서 선택된 값
+		a.value = data; // data값으로 select의 선택된 값을 변경
+	}
+	
+</script>
+
+<form name="f">
+	과일 :
+	<select name="s" onchange="nameprint(this)">
+		<option>사과</option>
+		<option>감</option>
+		<option>배</option>
+		<option>딸기</option>
+	</select>
+	
+</form>
+
+</body>
+</html>

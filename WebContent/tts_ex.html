@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- javaScript 브라우저가 관장하는 클라이언트 언어 -->
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Text To Speech 예제</title>
+<script type="text/javascript">
+	var msg = new SpeechSynthesisUtterance();
+	function setlang(t) { msg.lang = t; }
+	function ttsTest() {
+		// id속성으로 바로 들어가는 방법
+		// msg.text = intext.value;
+		
+		// 함수사용하는 방법
+		// document.getElementById(id속성값) : id속성값에 해당하는 태그 객체를 리턴
+		// 내 document에서 id속성값이 intext인 값을 가져와
+		msg.text = document.getElementById("intext").value;
+		speechSynthesis.speak(msg);
+	}
+</script>
+</head>
+
+<!-- id 속성 : 정의는 그 페이지에서 유일함 -->
+<body>
+<textarea rows="10" cols="100" id="intext">안녕하세요</textarea>
+<input type="button" onclick="setlang('ko_KR');ttsTest()" value="읽기">
+<br>
+</body>
+</html>

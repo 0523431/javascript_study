@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>로그인</title>
+
+<script type="text/javascript">
+	function checkinput(f) {
+		if(f.id.value == "") {
+			alert("아이디를 입력하세요")
+			f.id.focus(); // (확인)을 누르면 커서를 id로 집중
+			return false; // return 결과가 false이면 이벤트가 취소되고 action 페이지 이동이 안됨
+		}
+		if(f.pw.value == "") {
+			alert("비밀번호를 입력하세요")
+			f.pw.focus(); // (확인)을 누르면 커서를 pw로 집중
+			return false; // 입력하지않으면 false값을 받고 action을 실행하지 못하게 만들어
+		}
+		
+		// id와 pw가 입력된 경우, if문을 벗어나서 여기로 올 수 있음
+		// id, pw 입력된 값을 open_ex01.html에 전송 (다시 보낼 수 있어야해)
+		// 여기 페이지 입장에선 open_ex01은 나를 오픈한 opener
+		// 그 opener페이지에서 id를 바로 가져올 수 없어서 쓰는 함수: getElementById(id값)
+		opener.document.getElementById("id").value = f.id.value;
+		opener.document.getElementById("pw").value = f.pw.value;
+		self.close(); // 스스로 닫힘
+		return false;
+	}
+</script>
+
+</head>
+<body>
+<!--
+	onsubmit : form에 소속된 submit 버튼이 클릭되면 form에 발생되는 이벤트
+	onsubmit="return checkinput(this)"
+	checkinput(this)
+	- this는 form 객체
+	- input 검증
+	- 
+	
+	
+	submit을 버튼을 클릭하면 form이라는 객체 속 onsubmit이벤트가 발생
+	onsubmit은 input검증 받기 ======> checkinput()함수를 실행
+	그 함수 내용은 아이디와 비밀번호를 입력하지않으면 alert창을 띄움
+-->
+<form name="f" method="post" action="exam2.html"
+	  onsubmit="return checkinput(this)">
+	아이디 :<input type="text" name="id"><br>
+	비밀번호 :<input type="text" name="pw"><br>
+	<input type="submit" value="로그인">
+</form>
+</body>
+</html>

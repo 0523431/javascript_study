@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<!--
+	open_ex01.html페이지 =========== open_ex01.html페이지페이지
+	
+	1. open_ex01.html페이지에서 open_ex01.html페이지 >>>>>>> open
+	
+	2. open_ex01.html페이지에서 open_ex01.html페이지 >>>>>>>  접근
+	   nw 변수로 접근가능
+	
+	3. open_ex01.html페이지에서 open_ex01.html페이지  >>>>>>>  접근
+	   opener 접근가능
+	
+	4. 현재 페이지에서 window 객체에 접근하는 방법
+	   - self로 접근 : self.close(); 이런방법으로
+	   - window로 접근 : window.close();
+-->
+
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>새창 열기 (팝업)</title>
+
+<script type="text/javascript">
+	var nw; // 전역변수(전체적으로 다 사용 가능)
+	function open_win() {
+		/*
+			open() 새로운 윈도우를 생성하는 기능 ===== window객체, window.open()
+			- "inputcheck_ex.html" : 새로운 위도우에 호출될 html 페이지 지정
+			- "login" : 윈도우 이름, 지정안해도 됨 ""
+			- option : "가로길이,세로길이,munu bar표시여부,윈도우가 생성되는(보여지는) 위치"
+			
+			nw는 새로 생성된 window객체를 지정하는 참조변수가 됨 ===========> 내가 지정함
+			- 팝업창의 최상위 객체인 window가 됨.
+		*/
+		nw = open("inputcheck_ex.html","login",
+				  "width=600, height=200,munubar=no,top=200,left=200");
+		
+		// 문제
+		// 새 창에 id와 pw값을 현재 페이지에서 설정하기
+		// nw는 다른 창 window를 관장할 수 있으니까 그걸 이용해
+		// nw.onload : nw 새로운 창이 준비가 완료되면 발생하는 이벤트
+		nw.onload = function() {
+			nw.document.f.id.value = id.value;
+			nw.document.f.pw.value = pw.value;
+		}
+				
+		/* // nw를 덮어쓰게 됨
+		// 새창에 아래 내용을 쓰게 됨
+		nw.document.write("새로운 윈도우입니다<br>")
+		nw.document.write("open_ex1.html 페이지에서 open 함수로 생성되었습니다<br>")
+		
+		sum = parseInt(num1.value) + parseInt(num2.value);
+		nw.document.write(num1.value + "+" + num2.value + "=" + sum) */
+		
+	}
+	
+	function close_win() {
+		nw.close();
+		/* 위에서 만들어진 nw를 닫음 */
+	}
+</script>
+
+</head>
+<body>
+
+<!-- href : 원래는 다른 url로 이동 -->
+<a href="javascript:open_win()">새창열기</a>
+<br>
+<a href="javascript:close_win()">새창닫기</a>
+<br>
+<!-- 
+<input type="text" id="num1" size="5">+
+<input type="text" id="num2" size="5"> -->
+
+<hr>
+ID<input type="text" id="id" size="5"><br>
+PW<input type="text" id="pw" size="5">
+</body>
+</html>

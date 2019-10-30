@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>3가지 방법으로 구구단 출력하기</title>
+
+<style type="text/css">
+	table {
+		width : 100%;
+		border-collapse: collapse;
+	}
+	th,td {
+		border : 3px solid #bcbcbc;
+		text-align : center;
+		padding : 8px;
+	}
+	th { /* 단표시부분 */
+		background-color : #40A2AC; color : white;
+	}
+	td { /* 구구단 내용 부분 */
+		background-color : #C5FAFF;
+		text-align : center;
+	}
+	caption {
+		color : #111111;
+		font-size : 20px;
+		background-color : #ffffff;
+	}
+</style>
+
+<script type="text/javascript">
+	function ver() {
+
+		var html = "<table><caption>세로출력</caption>";
+		for(i=2; i<=9; i++) {
+			html += "<tr><th>"+i+"단</th><tr>";
+			for(j=1; j<=9; j++) {
+				// 동적으로 만들어진 테이블
+				html += "<tr><td>" + i + "*" + j + "=" + (i*j) + "</td></tr>"
+			}
+		}
+		html += "</table>"
+		result.innerHTML = html;
+		
+	}
+	
+	function hor() {
+		
+		var html = "<table><caption>가로출력</caption>";
+		
+		html += "<tr>"
+		for(i=2; i<=9; i++) {
+			html += "<th>"+i+"단</th>"
+		}
+		html += "</tr>"
+		
+		for(i=1; i<=9; i++) {
+		//	html += "<tr>"
+			for(j=2; j<=9; j++) {
+				// 동적으로 만들어진 테이블
+				html += "<td>" + j + "*" + i + "=" + (j*i) + "</td>"
+			}
+			html += "</tr>";
+		}
+		html += "</table>"
+		
+		result.innerHTML = html;
+	}
+	
+	function hor2() {
+		var html = "<table><caption>2단 출력</caption>";
+		
+		html += "<tr>"
+		for(i=2; i<=5; i++) {
+			html += "<th>"+i+"단</th>"
+		}
+		html += "</tr>"
+		
+		for(i=1; i<=9; i++) {
+			html += "<tr>"
+			for(j=2; j<=5; j++) {
+				// 동적으로 만들어진 테이블
+				html += "<td>" + j + "*" + i + "=" + (j*i) + "</td>"
+			}
+			html += "</tr>";
+		}
+		html += "</table>"
+		
+		html += "<br><br>"
+		
+		var html2 = "<table><tr>"
+		for(i=6; i<=9; i++) {
+			html2 += "<th>"+i+"단</th>"
+		}
+		html2 += "</tr>"
+		
+		for(i=1; i<=9; i++) {
+		html2 += "<tr>"
+			for(j=6; j<=9; j++) {
+				// 동적으로 만들어진 테이블
+				html2 += "<td>" + j + "*" + i + "=" + (j*i) + "</td>"
+			}
+			html2 += "</tr>";
+		}
+		result.innerHTML = html + html2;
+		// 새로운 테이블을 만들어서 그걸로 같이 적용하고 싶으면
+		// result.innerHTML = table + html;
+	}
+
+	function hor3() {
+		var html = "<table><caption>2단 출력(간결한 코딩)</caption>";
+		for(i=2; i<=9; i+=4) { // 전체적으로 2부분으로 나눠놓고 시작 =======> 한바퀴돌고 다시 시작하면 6단부터
+		
+			html += "<tr>"
+			for(k=0; k<4; k++) {
+				html += "<th>" + (i+k) + "단</th>"
+			}
+			html += "</tr>"
+			
+			for(j=1; j<=9; j++) {
+				html += "<tr>"
+				for(k=0; k<4; k++) {
+					html += "<td>" + (i+k) + "*" + j + "=" + ((i+k)*j) + "</td>"
+				}
+				html += "</tr>"
+			}
+		}
+		result.innerHTML = html;
+
+	}
+
+</script>
+
+</head>
+<body>
+
+<input type="button" value="세로출력" onclick="ver()">
+<input type="button" value="가로출력" onclick="hor()">
+<input type="button" value="2단 출력" onclick="hor2()">
+<input type="button" value="2단 출력(간결)" onclick="hor3()">
+<br><br>
+<div id="result"></div>
+
+</body>
+</html>

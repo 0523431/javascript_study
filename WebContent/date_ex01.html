@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>자바스크립트의 Date 객체 예제</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+	var day =new Date();
+	document.write("년도-1900 : " + day.getYear() + "<br>");
+	document.write("년도 : " + day.getFullYear() + "<br>");
+	document.write("월 : " + (day.getMonth() +1) + "<br>");
+	document.write("일 : " + day.getDate()+ "<br>");
+	document.write("요일(0일,1월,2화...6토) : " + day.getDay() + "<br>")
+	document.write("시 : " + day.getHours()+ "<br>");
+	document.write("분 : " + day.getMinutes()+ "<br>");
+	document.write("초 : " + day.getSeconds()+ "<br>");
+	document.write("1970년 이후 밀리초 : " + day.getTime() + "<br>");
+	
+	document.write("<br>" + day + "<br>");
+	
+	day = new Date(2020,0,1); // 2020년, (0월=>1월), 1일
+	document.write("2020년 1월 1일로 설정하기 : " + day + "<br>")
+	document.write("2020년 1월 1일 요일 : " + day.getDay() + "<br>")
+
+	document.write("<br><br><br>")
+	
+	day = new Date();
+	day3 = new Date(day.getTime() + (1000*60*60*3))
+	document.write("3시간 이후 시간 : " + day3)
+	
+	// 문제 : 다음날을 가지는 Date 객체 생성하기
+	document.write("<br><br><br>")
+	
+	day = new Date();
+	nextday = new Date(day.getTime() + (1000*60*60*24))
+	yesterday = new Date(day.getTime() - (1000*60*60*24))
+
+	document.write("다음날짜 : " + nextday + "<br>")
+	document.write("이전날짜 : " + yesterday)
+
+	//	nextday = new Date(day.getFullYear(), day.getMonth(), day.getDate()+1)
+
+</script>
+
+</body>
+</html>
